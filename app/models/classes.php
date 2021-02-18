@@ -1,5 +1,13 @@
 <?php
-class classes extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'classes';
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class classes extends Model
+{
+    protected $fillable = [
+        'id', 'className', 'classTeacher', 'classAcademicYear', 'classSubjects', 'dormitoryId'
+
+    ];
 }

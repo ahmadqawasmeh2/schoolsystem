@@ -1,5 +1,8 @@
 <?php
-class suppliers extends Eloquent {
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class suppliers extends Model {
 	public $timestamps = false;
 	protected $table = "suppliers";
 }

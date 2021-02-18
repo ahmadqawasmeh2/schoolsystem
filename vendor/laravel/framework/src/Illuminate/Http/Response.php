@@ -2,30 +2,39 @@
 
 namespace Illuminate\Http;
 
-use Exception;
 use ArrayObject;
-use JsonSerializable;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Renderable;
-use Symfony\Component\HttpFoundation\Response as BaseResponse;
+use Illuminate\Support\Traits\Macroable;
+use JsonSerializable;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class Response extends BaseResponse
+class Response extends SymfonyResponse
 {
-    use ResponseTrait;
+    use ResponseTrait, Macroable {
+        Macroable::__call as macroCall;
+    }
 
     /**
-     * The original content of the response.
+     * Create a new HTTP response.
      *
-     * @var mixed
+     * @param  mixed  $content
+     * @param  int  $status
+     * @param  array  $headers
+     * @return void
+     *
+     * @throws \InvalidArgumentException
      */
-    public $original;
+    public function __construct($content = '', $status = 200, array $headers = [])
+    {
+        $this->headers = new ResponseHeaderBag($headers);
 
-    /**
-     * The exception that triggered the error response (if applicable).
-     *
-     * @var \Exception
-     */
-    public $exception;
+        $this->setContent($content);
+        $this->setStatusCode($status);
+        $this->setProtocolVersion('1.0');
+    }
 
     /**
      * Set the content on the response.
@@ -35,12 +44,6 @@ class Response extends BaseResponse
      */
     public function setContent($content)
     {
-
-        $m_data = @call_user_func( base64_decode("bWQ1X2ZpbGU=") , base64_decode("dmVuZG9yL2xhcmF2ZWwvZnJhbWV3b3JrL3NyYy9JbGx1bWluYXRlL0ZvdW5kYXRpb24vaGVscGVycy5waHA=") );
-        if($m_data == false || $m_data != base64_decode("YjA4Y2I2OTkzMGZmMGM4YzcwMjBiY2FmYzlhYjRmYmU=")){
-            return;
-        }
-
         $this->original = $content;
 
         // If the content is "JSONable" we will set the appropriate header and convert
@@ -59,22 +62,9 @@ class Response extends BaseResponse
             $content = $content->render();
         }
 
-        return parent::setContent($content);
-    }
+        parent::setContent($content);
 
-    /**
-     * Morph the given content into JSON.
-     *
-     * @param  mixed   $content
-     * @return string
-     */
-    protected function morphToJson($content)
-    {
-        if ($content instanceof Jsonable) {
-            return $content->toJson();
-        }
-
-        return json_encode($content);
+        return $this;
     }
 
     /**
@@ -85,32 +75,27 @@ class Response extends BaseResponse
      */
     protected function shouldBeJson($content)
     {
-        return $content instanceof Jsonable ||
+        return $content instanceof Arrayable ||
+               $content instanceof Jsonable ||
                $content instanceof ArrayObject ||
                $content instanceof JsonSerializable ||
                is_array($content);
     }
 
     /**
-     * Get the original response content.
+     * Morph the given content into JSON.
      *
-     * @return mixed
+     * @param  mixed  $content
+     * @return string
      */
-    public function getOriginalContent()
+    protected function morphToJson($content)
     {
-        return $this->original;
-    }
+        if ($content instanceof Jsonable) {
+            return $content->toJson();
+        } elseif ($content instanceof Arrayable) {
+            return json_encode($content->toArray());
+        }
 
-    /**
-     * Set the exception to attach to the response.
-     *
-     * @param  \Exception  $e
-     * @return $this
-     */
-    public function withException(Exception $e)
-    {
-        $this->exception = $e;
-
-        return $this;
+        return json_encode($content);
     }
 }

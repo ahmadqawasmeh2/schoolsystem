@@ -1,5 +1,8 @@
 <?php
-class polls extends Eloquent {
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class polls extends Model {
 	public $timestamps = false;
 	protected $table = 'polls';
 }

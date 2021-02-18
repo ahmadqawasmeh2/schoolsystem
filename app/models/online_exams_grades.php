@@ -1,5 +1,11 @@
 <?php
-class online_exams_grades extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'online_exams_grades';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class online_exams_grades extends Model {
+    protected $fillable = [
+        'id', 'examId','studentId','examQuestionsAnswers','examGrade'
+        ,'examDate'
+
+    ];
 }

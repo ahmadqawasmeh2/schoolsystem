@@ -1,5 +1,10 @@
 <?php
-class fee_type extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'fee_type';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class fee_type extends Model {
+	protected $fillable = [
+        'id', 'feeTitle','feeCode','feeDescription','feeGroup'
+        ,'feeAmount','feeSchType','feeSchDetails'
+    ];
 }

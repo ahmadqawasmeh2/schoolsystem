@@ -1,5 +1,13 @@
 <?php
-class exam_marks extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'exam_marks';
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class exam_marks extends Model
+{
+    protected $fillable = [
+        'id', 'examId', 'classId', 'subjectId', 'examMark', 'totalMarks', 'markComments'
+
+    ];
 }

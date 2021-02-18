@@ -1,5 +1,8 @@
 <?php
-class newsboard extends Eloquent {
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class newsboard extends Model {
 	public $timestamps = false;
 	protected $table = 'newsboard';
 }

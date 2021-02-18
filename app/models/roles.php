@@ -1,5 +1,9 @@
 <?php
-class roles extends Eloquent {
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class roles extends Model {
 	public $timestamps = false;
 	protected $table = "roles";
 }

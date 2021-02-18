@@ -1,5 +1,10 @@
 <?php
-class income extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'income';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class income extends Model {
+	protected $fillable = [
+        'id', 'incomeDate','incomeTitle','incomeAmount','incomeCategory','incomeImage'
+        ,'incomeNotes'
+    ];
 }

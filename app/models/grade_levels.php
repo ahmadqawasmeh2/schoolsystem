@@ -1,5 +1,10 @@
 <?php
-class grade_levels extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'grade_levels';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class grade_levels extends Model {
+	protected $fillable = [
+        'id', 'gradeName','gradeDescription','gradePoints','gradeFrom'
+        ,'gradeTo'
+    ];
 }

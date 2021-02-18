@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
@@ -13,7 +13,23 @@ class User extends Authenticatable {
 
 	public $customPermissionsDecoded = "";
 
-	protected $table = 'users';
+    protected $fillable = [
+        'id', 'username','email',
+        'password','remember_token','fullName',
+        'role','role_perm','department',
+        'designation','activated','studentRollId'
+        ,'admission_number','admission_date','std_category'
+        ,'auth_session','birthday','gender'
+        ,'address','phoneNo','mobileNo'
+        ,'studentAcademicYear','studentClass','studentSection'
+        ,'religion','parentProfession','transport'
+        ,'transport_vehicle','hostel','medical'
+        ,'user_position','defLang','defTheme'
+        ,'salary_type','salary_base_id','comVia'
+        ,'father_info','mother_info','biometric_id'
+        ,'library_id','account_active','updated_at'
+        ,'customPermissionsType','customPermissions','firebase_token'
+    ];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

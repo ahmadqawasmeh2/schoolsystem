@@ -1,5 +1,13 @@
 <?php
-class dormitories extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'dormitories';
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class dormitories extends Model
+{
+    protected $fillable = [
+        'id', 'dormitory', 'dormDesc'
+
+    ];
 }

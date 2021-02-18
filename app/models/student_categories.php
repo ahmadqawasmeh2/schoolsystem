@@ -1,5 +1,8 @@
 <?php
-class student_categories extends Eloquent {
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class student_categories extends Model {
 	public $timestamps = false;
 	protected $table = "student_categories";
 }

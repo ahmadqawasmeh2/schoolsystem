@@ -1,5 +1,12 @@
 <?php
-class assignments_answers extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'assignments_answers';
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class assignments_answers extends Model
+{
+    protected $fillable = [
+        'assignmentId', 'userId', 'fileName', 'userNotes', 'userTime'
+    ];
 }

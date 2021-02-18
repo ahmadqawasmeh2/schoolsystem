@@ -1,5 +1,10 @@
 <?php
-class settings extends Eloquent {
-	public $timestamps = false;
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class settings extends Model
+{
+    public $timestamps = false;
 	protected $table = 'settings';
 }

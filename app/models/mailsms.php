@@ -1,5 +1,8 @@
 <?php
-class mailsms extends Eloquent {
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class mailsms extends Model {
 	public $timestamps = false;
 	protected $table = 'mailsms';
 }

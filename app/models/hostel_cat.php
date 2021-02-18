@@ -1,5 +1,9 @@
 <?php
-class hostel_cat extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'hostel_cat';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class hostel_cat extends Model {
+    protected $fillable = [
+        'id', 'catTypeId','catTitle','catFees','catNotes'
+    ];
 }

@@ -1,5 +1,11 @@
 <?php
-class student_docs extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'student_docs';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class student_docs extends Model {
+	protected $fillable = [
+        'id', 'user_id','file_title',
+        'file_name','file_notes'
+
+    ];
 }

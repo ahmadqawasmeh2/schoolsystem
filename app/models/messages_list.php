@@ -1,5 +1,9 @@
 <?php
-class messages_list extends Eloquent {
-	public $timestamps = false;
-	protected $table = 'messages_list';
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class messages_list extends Model {
+	protected $fillable = [
+        'id', 'userId','toId','lastMessage','lastMessageDate','messageStatus'
+    ];
 }

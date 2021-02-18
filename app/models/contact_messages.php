@@ -1,5 +1,13 @@
 <?php
-class contact_messages extends Eloquent {
-	public $timestamps = false;
-	protected $table = "contact_messages";
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class contact_messages extends Model
+{
+    protected $fillable = [
+        'id', 'mail_subject', 'firstName', 'lastName', 'email', 'message', 'message_time'
+
+    ];
 }
